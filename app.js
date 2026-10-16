@@ -6,13 +6,20 @@
     instagram: '', // e.g. 'https://www.instagram.com/yourpage/'
     facebook: ''   // e.g. 'https://www.facebook.com/yourpage/'
   };
+  var anySocial = false;
   [['social-ig', SETTINGS.instagram, 'Instagram'], ['social-fb', SETTINGS.facebook, 'Facebook']].forEach(function (s) {
     var el = document.getElementById(s[0]);
-    if (el && s[1]) {
+    if (!el) return;
+    if (s[1]) {
       el.href = s[1]; el.target = '_blank'; el.rel = 'noopener';
       el.setAttribute('aria-label', s[2]);
+      anySocial = true;
+    } else {
+      el.style.display = 'none'; /* hidden until a link is added */
     }
   });
+  var socialBox = document.querySelector('.social');
+  if (socialBox && !anySocial) socialBox.style.display = 'none';
 
   /* Mobile menu */
   var btn = document.getElementById('menu-btn');
